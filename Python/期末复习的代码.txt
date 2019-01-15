@@ -1,0 +1,362 @@
+# 1、水仙花数
+# 三位正整数，个十百位数的三次幂是其本身
+# 153 370 371 407
+# 方法一：
+q=[]
+for i in range(1,10):
+    for j in range(10):
+        for k in range(10):
+            if i**3+j**3+k**3==i*100+j*10+k:
+                q.append(i*100+j*10+k)
+print(q)
+# 方法二：
+# #自写，错误,不能用随机数，如果随机不出来就错误了，
+# 应该每个数都试一遍用range
+import random
+i=random.randint(100,999)
+a=i//100
+b=i//10%10
+c=i%10
+if a**3+b**3+c**3==i:
+    print(i)
+# 方法三
+for i in range(100, 1000):
+        a = i//100
+        b = i//10 % 10
+        c = i % 10
+        if a**3+b**3+c**3 == i:
+           print(i,end=" ")
+# 方法四：函数调用
+def shu():
+    for i in range (100,1000):
+        a=i//100
+        b=i//10%10
+        c=i%10
+        if a**3+b**3+c**3==i:
+            print(i,end=" ")
+shu()
+
+# 2、斐波那契数列
+# （1）斐波那契数列到第10项的数列
+def fab(n):
+  assert n >= 0, "n > 0"
+  if n <= 1:
+    return n
+  return fab(n-1) + fab(n-2)
+for i in range(1,11):
+    print(fab(i), end=' ')
+（2）求斐波那契数列第n项是多少
+def feb(n):
+    if n==1 or n==2 :
+        return 1
+    return feb(n-1)+feb(n-2)
+print(feb(2))
+
+# 3、递归函数
+# 定义：函数直接或间接调用自己本身
+# 注意：多次调用自己，会产生额外的函数调用代价
+#     停止递归：n=1时
+#     递归的终止条件一定要在递归公式之前判断
+# 公式：f(n)=f(n-1)*n
+#
+# 函数作用：n的阶乘
+def fun(n):
+    if n == 1:
+        return 1
+    return n*fun(n-1)
+print(fun(5))
+
+# 4、折半查找:查找某数是否在此数列里
+# 在顺序数列中
+def fun(n,nums):
+    high=len(nums)-1
+    low=0
+    while high>=low:
+        mid=(high+low)//2
+        if n<nums[mid]:
+            high=mid-1
+        elif n>nums[mid]:
+            low=mid+1
+        else:
+            break
+    if low <=high:
+        print("在")
+    elif low>high:
+        print("不在")
+i=[18,24,67,98]
+fun(5,i)
+
+# 非顺序数列，需要先排序
+a=[78,28,39,28,4,7,9,20]
+for i in range (len(a)-1):
+    for j in range (len(a)-1-i):
+        if a[j]>a[j+1]:
+            a[j],a[j+1]=a[j+1],a[j]
+def fun(n,nums):
+    high=len(nums)-1
+    low=0
+    while high>=low:
+        mid=(high+low)//2
+        if n>nums[mid]:
+            low=mid+1
+        elif n<nums[mid]:
+            high=mid-1
+    if high>=low:
+        print("在")
+    else:
+        print("不在")
+fun(11,a)
+
+# 5、嵌套循环
+for i in range(0,4):           # 0123
+    for j in range(0,5):       # 01234
+        print("*",end="")
+    print()
+
+# 6、成绩优良差的判定
+a=int(input("请输入你的成绩："))
+if (a>100) or (a<0):
+    print("Wrong")
+if a>90:
+    print("Excellent")
+if a>=60:
+    print("Good")
+else:
+    print("Fail")
+
+# 7、判断数字的奇偶
+# #if和elif的运用区别
+# #elif：if不对才使用
+a=int(input("输入数字："))
+if a==0:
+    print("偶数")
+elif a%2==0:
+    print("偶数")
+else:
+    print("奇数")
+print("程序结束了哈哈哈")
+
+# 8、打印乘法口诀表
+# 方法一、
+i=1
+while i<10:
+    j=1
+    while j<=i:
+        print("%d*%d=%d"%(i,j,i*j),end=" ")
+        j+=1
+    print(" ")
+    i+=1
+# 方法二、
+for i in range(1,10):
+    for j in range(1,i+1):
+        print("%d*%d=%d"%(i,j,i*j))
+    print(" ")
+
+# 9、输入n，求n的阶乘
+# 方法一：
+n=int(input("输入n的值："))
+i=1
+result=1
+while i<=n:
+    result=i*result
+    i+=1
+print(result)
+# 方法二：函数调用
+def fun(n):
+    if n == 1:
+        return 1
+    return n*fun(n-1)
+print(fun(5))
+
+# 10、十以内加减乘除的计算器
+q=input("输入：")
+# p=q.split(" ")  ##这好像没有什么用处
+num1=int(q[0])
+num2=int(q[2])
+if q[1]=="+":
+    print(num1+num2)
+elif q[1]=="-":
+    print("%d"%(num1-num2))
+elif q[1]=="*":
+    print(num1*num2)
+elif q[1]=="/":
+    if num2==0:
+        print("除数不能是0")
+    else:
+        print(num1/num2)
+
+q=input("输入：")
+q.split(" ")
+num1=int(q[0])
+num2=int(q[2])
+if q[1]=="+":
+    print(num1+num2)
+elif q[1]=="-":
+    print(num1-num2)
+elif q[1]=="*":
+    print(num1*num2)
+elif q[1]=="/":
+    if num2==0:
+        print("除数不能为0")
+    else:
+        print(num1/num2)
+
+# 11、输入任意位整数，判断整数中各位上是否有3
+# 方法一：
+num=int(input("输入一个数："))
+while num!=0:
+    if num%10==3:
+        break
+    num=num//10
+if num==0:
+    print("没有")
+else:
+    print("有")
+# 方法二：
+n=input()
+sum=0
+for i in n :
+    if i == "3" :
+        sum+=1
+if sum == 0 :
+    print("没有")
+else:
+    print("有")
+
+# 12、冒泡排序
+# 从小到大
+num=[7,10,6,9,4]
+for i in range(len(num)-1): ##len(num)=5;i=0,1,2,3
+    for j in range(len(num)-1-i):  ##j=4,3,2,1
+        if num[j]>num[j+1]:
+            num[j],num[j+1]=num[j+1],num[j]
+print(num)
+#结果：[4, 6, 7, 9, 10]
+
+# 找分值第二大的数字
+q=input("输入十个数：")
+a=q.split(",")
+for i in range(len(a)-1):
+    for j in range(len(a)-1-i):
+          if int(a[j])<int(a[j+1]):  ##注意用int把字符串化为整型
+             a[j],a[j+1]=a[j+1],a[j]
+print(a[1])
+
+# 13、随机叫号
+# (左右侧均是1-6列，共12列）
+# 方法一：
+import random
+q=random.randint(1,9)
+p=random.randint(1,6)
+a=random.randint(0,1)
+c=["左","右"]
+i=c.pop(a)
+print("请%s侧第%d排%d列同学起来回答问题"%(i,q,p))
+# 方法二：
+import random
+a=random.randint(1,9)
+b=random.randint(1,6)
+c=random.choice("左""右")
+print("请%s侧第%d排%d列同学起来回答问题"%(c,a,b))
+
+# （左侧1-6列，右侧7-12列）
+import random
+a=random.randint(1,9)
+b=random.randint(1,12)
+if b>6:
+    print("请右侧%d行%d列的同学回答问题"%(a,b-6))
+else:
+    print("请左侧%d行%d列的同学回答问题" % (a, b))
+
+# 14、回文字符串
+i=input("输入一个字符串判断是否是回文字符串：")
+h=list(i)
+h.reverse()   ##注意前面不能加a=h.reverse()
+j=list(i)
+if j==h:
+   print("是回文字符串")
+else:
+   print("不是回文字符串")
+
+# 15、今天是今年的第几天
+i=input("输入2018年的某一天:")
+i=i.split("/")        ##注意必须前面的”i=“否则定义不了
+a=int(i[0])
+b=int(i[1])
+if (a==1)and(b<=31):
+    c=b
+elif (a==2)and(b<=28):
+    c=31+b
+elif (a==3)and(b<=31):
+    c=31+28+b
+elif (a==4)and(b<=30):
+    c=31*2+28+b
+elif (a==5)and(b<=31):
+    c=31*2+28+30+b
+elif (a==6)and(b<=30):
+    c=31*3+28+30+b
+elif (a==7)and(b<=31):
+    c=31*3+28+30*2+b
+elif (a==8)and(b<=31):
+    c=31*4+30*2+28+b
+elif (a==9)and(b<=30):
+    c=31*5+28+30*2+b
+elif (a==10)and(b<=31):
+    c=31*5+28+30*3+b
+elif (a==11)and(b<=30):
+    c=31*6+28+30*3+b
+elif (a==12)and(b<=31):
+    c=31*6+28+30*4+b
+print("这是2018年的第%d天"%c)
+
+# 16、数鸡蛋
+x=1
+while x >0 :
+    if x%2==1 and x%3==0 and x%4==1 and x%5==4 and x%6==3 and x%7==0 and x%8==1 and x%9==0:
+        print(x)
+        break
+    x+=1
+
+# 17、进制转换
+import random
+n=random.randint(2,9)
+q=input("输入%d进制下十进制666的书写形式"%n)
+x=666
+r=0
+R=[]
+while x!=0:
+    r=x%n
+    x=x//n
+    R=[r]+R    ##注意一定要是把[r]放在前面
+                 #此时r是往列表的首部加的正好顺序正确
+for i in range(0,len(R)):
+    print(R[i],end=" ")
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
